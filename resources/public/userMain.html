@@ -1,0 +1,117 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Bill Meister</title>
+ 
+    <script src="ext2.2/adapter/ext/ext-base.js"></script>
+    <script src="ext2.2/ext-core-debug.js"></script>
+    <script src="ext2.2/ext-all-debug.js"></script>
+    
+    <script src="script/namespaces.js"></script>
+     <link href="ext2.2/resources/css/ext-all.css" rel="stylesheet" type="text/css"/>     
+     <script src="ExtExtension/grid-filtering/grid/filter/Filter.js"></script>
+     <script src="ExtExtension/grid-filtering/grid/filter/BooleanFilter.js"></script>
+     <script src="ExtExtension/grid-filtering/grid/filter/DateFilter.js"></script>     
+     <script src="ExtExtension/grid-filtering/grid/filter/NumericFilter.js"></script>
+     <script src="ExtExtension/grid-filtering/grid/filter/StringFilter.js"></script>
+     <script src="ExtExtension/grid-filtering/grid/filter/ListFilter.js"></script>
+	<script src="ExtExtension/grid-filtering/grid/GridFilters.js"></script>
+	<script src="ExtExtension/Format.js"></script>     
+     
+    <script src="script/integration/remotingProxy.js"></script>
+    <script src="script/integration/remotingFormHandler.js"></script>    
+    <script src="script/layout.js"></script>
+    
+    <script src="script/util/gridBuilder.js"></script>
+    
+    <style>
+    .newUser {
+    	background-image:url(img/dtpick.gif);
+		background-position:100% 0;
+		background-repeat:no-repeat;
+	}
+	.existingUserInGroup {
+    	background-image:url(img/error.gif);
+		background-position:100% 0;
+		background-repeat:no-repeat;
+	}
+	.existingUserNotInGroup {
+    	background-image:url(img/newUser.gif);
+		background-position:100% 0;
+		background-repeat:no-repeat;
+	}
+    
+    </style>
+    
+    
+
+
+<script type="text/javascript" src="seam/resource/remoting/resource/remote.js"></script>
+<script src="script/i18ln/en_messages.js"></script>
+<script src="ext2.2/locale/ext-lang-en.js"></script>
+ <script src="script/sessionBeanStores.js"></script>
+<script src="script/accountsGrid.js"></script>
+<script src="script/tasksGrid.js"></script>
+<script src="script/owages.js"></script>
+<script src="script/userMainOnReady.js"></script>
+<script src="script/userGroup/inviteUserToGroup.js"></script>
+<script src="script/userGroup/userGroupManagerFn.js"></script>
+<script src="script/userAccount/userDetailsFn.js"></script>
+<script src="script/helpManagerFn.js"></script>
+<script src="script/userGroup/userRequestingToJoinGroup.js"></script>
+<script src="script/i18ln/localeSelector.js"></script>
+<script> 
+Ext.onReady(function(){
+Voltan.billManager.userMainOnReady('en');
+});
+
+function sab(){
+var  k = Seam.Component.getInstance('taskManager');
+var c = null;var callb = function(data){ c = data;}
+var inst = Seam.Remoting.createType('org.domain.testSeam21a.entity.Users');
+inst.setId(1);//k.getUserGroups(callb)
+k.getPaymentHistory(inst,callb);
+var j = null;
+var callb2 = function(data){ j = data;}
+k.getMembers(c[2],callb2)
+}
+
+</script>    
+
+</head>
+  <div id="west">
+     
+
+  </div>
+  <div id="north" style="height:80px">
+  <div id="banner" style="width:60%;height:80px">
+  	<img src="img/bus.jpg" style="height:80px;display:inline"/>
+    	<span style=";display:inline;margin-left:30px;font-size:600%"></span>
+     	<span style=";margin-left:580px;display:inline" >You are logged in as: #{sessionUser.name}</span>            
+        <s:link view="/login.xhtml" value="Login" rendered="#{not identity.loggedIn}"/>
+        <s:link view="/userMain.xhtml" action="#{identity.logout}" value="Logout" rendered="#{identity.loggedIn}"/>
+    </div>
+    <div id="localeEl" style="display:inline;width:40%;height:80px"/>
+  </div>
+  <div id="center2">
+  </div>
+
+  <div id="center1">
+	<div id="groupGrid"/>
+	<div id="groupMembersGrid"/>
+  </div>
+  <div id="props-panel" style="width:200px;height:200px;overflow:hidden;">
+  </div>
+  
+	<form id="languageSelectorForm">
+	<h:selectOneMenu value="en" id="languageSelectorMenu">
+	<f:selectItem itemLabel="English" itemValue="en"/>
+	<f:selectItem itemLabel="Deutsch" itemValue="de"/>
+	<f:selectItem itemLabel="Francais" itemValue="fr"/>
+	</h:selectOneMenu>
+	<h:commandButton action="#{localeSelector.select}" value="#{messages['ChangeLanguage']}"/>
+	<form>
+    

@@ -1,0 +1,118 @@
+
+    <html>
+    <head>
+    <script src="ext2.2/adapter/ext/ext-base.js"></script>
+    <script src="ext2.2/ext-core-debug.js"></script>
+    <script src="ext2.2/ext-all-debug.js"></script>
+    <script src="ext2.2/locale/ext-lang-en.js"></script>
+     <link href="ext2.2/resources/css/ext-all.css" rel="stylesheet" type="text/css"/>
+     <script src="script/namespaces.js"></script>
+     <script src="script/i18ln/en_messages.js"></script>
+	<style>
+		body > table{ width:100%; height:100%;}				
+		
+		.logoBack{
+			background: img('img/bus.jpg');
+		}
+	</style>
+	
+	
+	<script type="text/javascript" src="seam/resource/remoting/resource/remote.js" ></script>	
+    <script src="script/integration/remotingProxy.js" ></script>
+    <script src="script/integration/remotingFormHandler.js" ></script> 
+<script src="script/userAccount/userAccountManager.js" ></script>
+<script src="script/i18ln/localeSelector.js" ></script>
+<script>
+
+Voltan.billManager.userMainOnReady = function(){
+	
+	    Ext.QuickTips.init();
+    var sessionProxy = {
+       userAccountManager : ""// Seam.Component.getInstance('userAccountManager')    
+    };
+	
+	
+    var userAccountManager = Voltan.billManager.userAccountManagerFn({
+		sessionProxy: sessionProxy
+	});
+	
+    var viewport = new Ext.Viewport({
+            layout:'border',
+            defaults:{
+				border: false,
+        		margins: '0 0 0 0'
+        	},
+			items: [
+				{
+    			region:'center',
+    			layout:'border',
+    			items:[
+    			{
+    				region:'center',
+    				html:'<p>Use Bill Meister to avoid the pain of sharing bills and expenses amongst groups of individuals.</p><p>If you live in a shared flat, or run a club or society, you will know what an effort it is to keep track of bills and who owes what amount to whom.</p><p>In a lot of cases, it makes life much easier if one person does everything - which means they have a lot of work to do and are often out of pocket.</p><p>Bill meister allows you to easily keep track of bills and payments so you no longer have to make the effort.</p>'
+    			},
+    			userAccountManager.getWindow()
+					
+				]
+    			
+    			},
+    			{
+    			  region:'west',
+    			  width:300    			
+    			},			
+				{
+    			region:'north',
+    			layout:'border',
+    			height:82,
+    			items:[
+    				{ region:'east',
+    					html:'<img src="img/bus.jpg" style="height:80px;display:inline"/>'
+    				},
+    				{
+    					region:'center',
+    					items:[
+    						Voltan.i18ln.localeSelectorFunction('#{localeSelector.language}')
+    					]
+    				}
+    			]    			
+    			},
+    			{
+    			region:'south',
+    			height:82,
+    			html:'&cpy; Voltan 2009'
+    			},
+    			{
+    			region:'east',
+    			layout:'fit',
+    			width:300				
+				}
+			]
+			});
+	
+}
+
+Ext.onReady(function(){
+Voltan.billManager.userMainOnReady();
+});
+	
+</script>
+
+</head>
+<div  style="width:100%;height:100%;background:green">
+	<h:messages globalOnly="false" styleClass="message"/>
+    <div id="banner" style="width:75%"></div>
+	<div id="loginForm"></div>
+	<div id="localeSelection">
+	<form id="languageSelectorForm">
+	<selectOneMenu value="#{localeSelector.language}" id="languageSelectorMenu">
+	<selectItem itemLabel="English" itemValue="en"/>
+	<selectItem itemLabel="Deutsch" itemValue="de"/>
+	<selectItem itemLabel="Francais" itemValue="fr"/>
+	</selectOneMenu>
+	
+	</form>
+	</div>
+</div>
+
+
+ </html>

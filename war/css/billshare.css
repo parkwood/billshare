@@ -1,0 +1,15 @@
+   .newUser {
+    	background-image:url(img/dtpick.gif);
+		background-position:100% 0;
+		background-repeat:no-repeat;
+	}
+	.existingUserInGroup {
+    	background-image:url(img/error.gif);
+		background-position:100% 0;
+		background-repeat:no-repeat;
+	}
+	.existingUserNotInGroup {
+    	background-image:url(img/newUser.gif);
+		background-position:100% 0;
+		background-repeat:no-repeat;
+	}

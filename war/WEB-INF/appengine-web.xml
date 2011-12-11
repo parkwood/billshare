@@ -2,7 +2,7 @@
 
   <application>shlurped</application>
   <version>1</version>
-  <static-files>/resources</static-files>
+  <static-files></static-files>
   <resource-files/>
   <threadsafe>true</threadsafe>
 

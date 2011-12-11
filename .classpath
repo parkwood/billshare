@@ -4,42 +4,45 @@
 	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="classes"/>
-	<classpathentry kind="lib" path="lib/appengine-api-1.0-sdk-1.5.2.jar"/>
-	<classpathentry kind="lib" path="lib/appengine-api-labs-1.5.2.jar"/>
-	<classpathentry kind="lib" path="lib/appengine-api-stubs-1.5.2.jar"/>
-	<classpathentry kind="lib" path="lib/appengine-local-runtime-1.5.2.jar"/>
-	<classpathentry kind="lib" path="lib/appengine-local-runtime-shared-1.5.2.jar"/>
-	<classpathentry kind="lib" path="lib/appengine-magic-0.4.3.jar"/>
-	<classpathentry kind="lib" path="lib/appengine-testing-1.5.2.jar"/>
-	<classpathentry kind="lib" path="lib/appengine-tools-api-1.5.2.jar"/>
-	<classpathentry kind="lib" path="lib/c3p0-0.9.1.2.jar"/>
+	<classpathentry kind="lib" path="lib/dev/appengine-api-1.0-sdk-1.5.5.jar"/>
+	<classpathentry kind="lib" path="lib/dev/appengine-api-labs-1.5.5.jar"/>
+	<classpathentry kind="lib" path="lib/dev/appengine-api-stubs-1.5.5.jar"/>
+	<classpathentry kind="lib" path="lib/dev/appengine-local-runtime-1.5.5.jar"/>
+	<classpathentry kind="lib" path="lib/dev/appengine-local-runtime-shared-1.5.5.jar"/>
+	<classpathentry kind="lib" path="lib/dev/appengine-magic-0.4.6.jar"/>
+	<classpathentry kind="lib" path="lib/dev/appengine-testing-1.5.5.jar"/>
+	<classpathentry kind="lib" path="lib/dev/appengine-tools-api-1.5.5.jar"/>
+	<classpathentry kind="lib" path="lib/dev/commons-codec-1.4.jar"/>
+	<classpathentry kind="lib" path="lib/dev/commons-el-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/dev/commons-exec-1.1.jar"/>
+	<classpathentry kind="lib" path="lib/dev/commons-fileupload-1.2.1.jar"/>
+	<classpathentry kind="lib" path="lib/dev/commons-io-1.4.jar"/>
+	<classpathentry kind="lib" path="lib/dev/commons-logging-1.0.3.jar"/>
+	<classpathentry kind="lib" path="lib/dev/geronimo-jsp_2.1_spec-1.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/dev/jasper-runtime-5.0.28.jar"/>
+	<classpathentry kind="lib" path="lib/dev/jstl-1.1.2.jar"/>
+	<classpathentry kind="lib" path="lib/dev/ring-core-0.3.11.jar"/>
+	<classpathentry kind="lib" path="lib/dev/servlet-api-2.5.jar"/>
+	<classpathentry kind="lib" path="lib/dev/standard-1.1.2.jar"/>
 	<classpathentry kind="lib" path="lib/clj-json-0.4.3.jar"/>
 	<classpathentry kind="lib" path="lib/clj-stacktrace-0.2.3.jar"/>
 	<classpathentry kind="lib" path="lib/clojure-1.3.0.jar"/>
 	<classpathentry kind="lib" path="lib/clout-0.4.1.jar"/>
 	<classpathentry kind="lib" path="lib/commons-codec-1.3.jar"/>
-	<classpathentry kind="lib" path="lib/commons-codec-1.4.jar"/>
-	<classpathentry kind="lib" path="lib/commons-el-1.0.jar"/>
-	<classpathentry kind="lib" path="lib/commons-exec-1.1.jar"/>
 	<classpathentry kind="lib" path="lib/commons-fileupload-1.2.1.jar"/>
 	<classpathentry kind="lib" path="lib/commons-httpclient-3.1.jar"/>
 	<classpathentry kind="lib" path="lib/commons-io-1.4.jar"/>
 	<classpathentry kind="lib" path="lib/commons-logging-1.1.1.jar"/>
 	<classpathentry kind="lib" path="lib/compojure-0.6.5.jar"/>
 	<classpathentry kind="lib" path="lib/core.incubator-0.1.0.jar"/>
-	<classpathentry kind="lib" path="lib/geronimo-jsp_2.1_spec-1.0.1.jar"/>
 	<classpathentry kind="lib" path="lib/hiccup-0.3.6.jar"/>
 	<classpathentry kind="lib" path="lib/jackson-core-asl-1.5.0.jar"/>
-	<classpathentry kind="lib" path="lib/jasper-runtime-5.0.28.jar"/>
 	<classpathentry kind="lib" path="lib/java-xmlbuilder-0.4.jar"/>
 	<classpathentry kind="lib" path="lib/java.classpath-0.1.0.jar"/>
-	<classpathentry kind="lib" path="lib/java.jdbc-0.0.6.jar"/>
 	<classpathentry kind="lib" path="lib/jbcrypt-0.3m.jar"/>
 	<classpathentry kind="lib" path="lib/jets3t-0.8.0.jar"/>
 	<classpathentry kind="lib" path="lib/jetty-6.1.25.jar"/>
 	<classpathentry kind="lib" path="lib/jetty-util-6.1.25.jar"/>
-	<classpathentry kind="lib" path="lib/jstl-1.1.2.jar"/>
-	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.6.jar"/>
 	<classpathentry kind="lib" path="lib/noir-1.2.1.jar"/>
 	<classpathentry kind="lib" path="lib/ns-tracker-0.1.1.jar"/>
 	<classpathentry kind="lib" path="lib/ring-1.0.0-RC1.jar"/>
@@ -50,7 +53,6 @@
 	<classpathentry kind="lib" path="lib/ring-servlet-1.0.0-RC1.jar"/>
 	<classpathentry kind="lib" path="lib/servlet-api-2.5-20081211.jar"/>
 	<classpathentry kind="lib" path="lib/servlet-api-2.5.jar"/>
-	<classpathentry kind="lib" path="lib/standard-1.1.2.jar"/>
 	<classpathentry kind="lib" path="lib/tools.macro-0.1.0.jar"/>
 	<classpathentry kind="lib" path="lib/tools.namespace-0.1.0.jar"/>
 	<classpathentry kind="lib" path="C:/Users/h/Downloads/eclipse-java-helios-SR2-win32-x86_64/eclipse/plugins/com.google.appengine.eclipse.sdkbundle_1.5.2.r36v201107211953/appengine-java-sdk-1.5.2/lib/shared/appengine-local-runtime-shared.jar">
@@ -153,6 +155,6 @@
 			<attribute name="javadoc_location" value="file:/C:/Users/h/Downloads/eclipse-java-helios-SR2-win32-x86_64/eclipse/plugins/com.google.appengine.eclipse.sdkbundle_1.5.2.r36v201107211953/appengine-java-sdk-1.5.2/docs/javadoc/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/disruptor/lib/test/junit-4.5.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

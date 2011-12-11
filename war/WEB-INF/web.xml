@@ -4,7 +4,7 @@
 
   <servlet>
     <servlet-name>app</servlet-name>
-    <servlet-class>boards_pevensey_scrape.app_servlet</servlet-class>
+    <servlet-class>billshare.app_servlet</servlet-class>
   </servlet>
 
   <servlet-mapping>

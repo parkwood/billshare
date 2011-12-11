@@ -15,7 +15,13 @@
                [:div#wrapper
                 content]])))
 
-(defn holy-shit [f]
+(defn no-arg-data [f]
   (let [user (guser/current-user)
         ds-user (ds-user-service/get-user (guser/get-email user))]
-    (response/json(f ds-user))))
+    (response/json {:data (f ds-user)})))
+
+(defn arg-data [f args-seq]
+  (let [user (guser/current-user)
+        ds-user (ds-user-service/get-user (guser/get-email user))
+        fn-with-user (partial f ds-user)]
+    (response/json (reduce (fn [x] ()) {} args-seq))))

@@ -3,12 +3,9 @@
   (:require [appengine-magic.testing :as ae-testing]
             [billshare.models.data-model]
             [appengine-magic.services.datastore :as ds])
-
+  (:import  [billshare.models.data_model User House UserHouseRelation Account])
 )
 
-(ds/defentity User [name 	password 	random 	username 	email activeStatus userHouseRelations]) ;when create new, say :parent user
-(ds/defentity House [name description])
-(ds/defentity UserHouseRelation [relationshipStatus house]) 
 
 (use-fixtures :each (ae-testing/local-services :all))
 

@@ -72,7 +72,7 @@ Ext.extend(Ext.ux.data.SeamRemotingProxy, Ext.data.DataProxy, {
     loadResponse: function(response, reader, callback, scope, arg) {
         var result;
         try {
-            result = reader.read(response);
+            result = reader.read(response.responseText);
         } catch (e) {
         	console.debug(e);
             this.fireEvent("loadexception", this, response, e);
@@ -123,13 +123,13 @@ Ext.extend(Ext.ux.data.SeamRemotingJsonReader, Ext.data.JsonReader, {
     read: function(response) { 
     //return response;
      //response = '{data:'+Ext.encode(response)+'}';
-       // var json = Ext.decode(response);//{data:response};//
+        var response = Ext.decode(response);//{data:response};//
         
 		if(!response || typeof response !== 'object'){
 			response = {success:false, data:[]};
 		}
 		else{
-			response = {data:response};
+			response = response.data;
 		}
 		
         if (response.data && response.data.exception) {

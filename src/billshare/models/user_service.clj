@@ -1,11 +1,10 @@
 (ns billshare.models.user-service
   (:require [billshare.models.data-model]
-            [appengine-magic.services.datastore :as ds]))
+            [appengine-magic.services.datastore :as ds])
+  (:import  [billshare.models.data_model User House UserHouseRelation Account]
+            ))
 
-(ds/defentity User [name 	password 	random 	username 	email activeStatus userHouseRelations]) ;when create new, say :parent user
-(ds/defentity House [name description])
-(ds/defentity UserHouseRelation [relationshipStatus house]) 
-(ds/defentity Account [name activeStatus bills])
+
 
 (defn get-user [email]
   (or
@@ -37,6 +36,7 @@
 ;tempId	1003
 (defn- persistGroup [user {:keys [id name description relationshipStatus]}]
   "lets assume we have user already"
+  ;(prn "A group"  id name description relationshipStatus)
   (if-let [uhr (first(ds/query :kind UserHouseRelation :ancestor user :filter (= :house id)))]
     (let [house (first(ds/query :kind House :ancestor (:house uhr)))
           saved-house (ds/save! (assoc house :description description :name name))
@@ -51,8 +51,9 @@
   )
 
 (defn persistAndAugmentGroup [user {:keys [tempId relationshipStatus] :as from-web}] 
+  (prn from-web tempId)
   (let [saved-house (persistGroup user from-web)]
-    (prn "!!!!!!!!!!11" saved-house)
+    ;(prn "!!!!!!!!!!11" saved-house)
     (assoc saved-house :tempId tempId :relationshipStatus relationshipStatus :id (ds/key-str saved-house)))
   )
 

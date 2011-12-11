@@ -7,7 +7,7 @@ Voltan.extExtension.util.editorGridBuilder = function(){
     	var writer = ds.writer || {};
     	var toSubmit = [];
     	for (var i=0;i<modified.length;++i){
-    	var inst = {};//Seam.Remoting.createType(grid.domainType);
+    	var inst = {};
     	    var row = modified[i];
     	    for(var att in row.data){
     	    	if(writer[att]){
@@ -33,10 +33,12 @@ Voltan.extExtension.util.editorGridBuilder = function(){
     //debugger;
     Ext.Ajax.request({
  	   url: grid.persistUrl || '/unknown',
- 	   success: callBack,
- 	   failure: function(){alert("Error")},
- 	   
- 	   params: inst
+ 	   success: function(response){
+ 		  var jsonMessage = Ext.decode(response.responseText);
+ 		   callBack.call(jsonMessage);
+ 	   },
+ 	   failure: function(){alert("Error")}, 	   
+ 	   params: {toPersist: Ext.util.JSON.encode(toSubmit)}
  	}); 
         
     

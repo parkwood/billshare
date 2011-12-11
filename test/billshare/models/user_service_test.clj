@@ -1,7 +1,9 @@
 (ns billshare.models.user-service-test
   (:use [clojure.test])
   (:require [billshare.models.user-service :as service]
-            [appengine-magic.testing :as ae-testing]))
+            [appengine-magic.testing :as ae-testing]
+            [billshare.models.data-model])
+  (:import  [billshare.models.data_model User House UserHouseRelation Account]))
 ;(run-tests)
 
 (use-fixtures :each (ae-testing/local-services :all))

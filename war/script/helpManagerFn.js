@@ -3,7 +3,7 @@
  * @param {Object} messages - values are of form {message:''}
  */
 Voltan.billManager.helpManagerFn = function(messages){
-	
+
 	var helpPanel = new Ext.Panel({
 		ctCls:'mahmoud',
 		bodyStyle:'overflow:scroll'
@@ -11,8 +11,8 @@ Voltan.billManager.helpManagerFn = function(messages){
 	var tableRowTemplate = new Ext.Template('<tr><td>{0}</td><td>{1}</td></tr>');
 	var tableTemplate = new Ext.Template('<table>{0}</table>');//<th rowspan="2">Questions</th>
 	var helpTemplate = new Ext.Template(Voltan.i18ln.labels.help+' => {strapLine}');
-	
-	
+
+
 	return{
 		show:function(){
 			var container = Ext.getCmp('south');
@@ -26,7 +26,7 @@ Voltan.billManager.helpManagerFn = function(messages){
 
 		},
 		unshow:function(){},
-	getHelpPanel:function(){
-		return helpPanel;
-	}};
+		getHelpPanel:function(){
+			return helpPanel;
+		}};
 }

@@ -1,66 +1,66 @@
 
 Voltan.billManager.inviteUserToGroupDialogFn = function(cfg){
-    
+
 	var persistInvitationsProxy = new Ext.ux.data.SeamRemotingProxy({
-        remoteMethod: cfg.sessionProxy.groupList.persistInvitations, 
-        seamComponent: cfg.sessionProxy.groupList
-    });
-	
+		remoteMethod: cfg.sessionProxy.groupList.persistInvitations, 
+		seamComponent: cfg.sessionProxy.groupList
+	});
+
 	var verifyActionProxy = new Ext.ux.data.SeamRemotingProxy({
-        remoteMethod: cfg.sessionProxy.groupList.validateInviteUsers, 
-        seamComponent: cfg.sessionProxy.groupList
-    });
-    
-    var inviteUserToGroup = function(rowIndex,grid,groupMembersGrid){
-		
-var inviteUserPanel = new Ext.ux.form.SeamFormPanel({
-	 autoScroll :true,
-	useMap:true, 
-    seamComponent: null,
-	remoteMethod:null,     	
-    id: 'inviteUserForm',
-	title:Voltan.i18ln.labels.typeEmailOfInvitee,
-    baseCls: 'x-plain',
-    labelWidth: 120,
-    defaults: {
-        width: 200,
-        validationEvent: false,
-        allowBlank: false
-    },
-    frame: false,
-    height: 130, 
-    items:[
-	
-    	{ 
-	        xtype: 'hidden',       		       
-	        name: 'groupId',
-			value: grid.getStore().getAt(rowIndex).json.house.id
-    	},
-	{ 
-        xtype: 'textfield',
-        fieldLabel:Voltan.i18ln.labels.email+' 1',
-        inputType: 'text',
-        name: 'userEmail1',
-    }]
-});
-var userInviteCount = 2;
+		remoteMethod: cfg.sessionProxy.groupList.validateInviteUsers, 
+		seamComponent: cfg.sessionProxy.groupList
+	});
 
-var addEmailButton = new Ext.Button({
-	text:'add another user to the list of invites',
-	 handler:function(){
-	 	var newField = new Ext.form.Field({
-			name: 'userEmail'+userInviteCount,
-			fieldLabel:Voltan.i18ln.labels.email+' '+userInviteCount
+	var inviteUserToGroup = function(rowIndex,grid,groupMembersGrid){
+
+		var inviteUserPanel = new Ext.ux.form.SeamFormPanel({
+			autoScroll :true,
+			useMap:true, 
+			seamComponent: null,
+			remoteMethod:null,     	
+			id: 'inviteUserForm',
+			title:Voltan.i18ln.labels.typeEmailOfInvitee,
+			baseCls: 'x-plain',
+			labelWidth: 120,
+			defaults: {
+				width: 200,
+				validationEvent: false,
+				allowBlank: false
+			},
+			frame: false,
+			height: 130, 
+			items:[
+
+			       { 
+			    	   xtype: 'hidden',       		       
+			    	   name: 'groupId',
+			    	   value: grid.getStore().getAt(rowIndex).json.house.id
+			       },
+			       { 
+			    	   xtype: 'textfield',
+			    	   fieldLabel:Voltan.i18ln.labels.email+' 1',
+			    	   inputType: 'text',
+			    	   name: 'userEmail1',
+			       }]
 		});
-	 	inviteUserPanel.add(newField);
-		inviteUserPanel.doLayout();
-		userInviteCount++;
-	 }
-	
-});
+		var userInviteCount = 2;
 
-var submitButton = new Ext.Button(
-{
+		var addEmailButton = new Ext.Button({
+			text:'add another user to the list of invites',
+			handler:function(){
+				var newField = new Ext.form.Field({
+					name: 'userEmail'+userInviteCount,
+					fieldLabel:Voltan.i18ln.labels.email+' '+userInviteCount
+				});
+				inviteUserPanel.add(newField);
+				inviteUserPanel.doLayout();
+				userInviteCount++;
+			}
+
+		});
+
+		var submitButton = new Ext.Button(
+				{
 					text:Voltan.i18ln.labels.sendInvites,
 					disabled:true,
 					handler: function(){
@@ -78,15 +78,15 @@ var submitButton = new Ext.Button(
 								Ext.Msg.alert('Status', Voltan.i18ln.labels.saveFailure);
 							}
 						}
-						
+
 						);
-						
-						
+
+
 					}
 				});
 
-var validateButton = new Ext.Button(
-{
+		var validateButton = new Ext.Button(
+				{
 					text: Voltan.i18ln.labels.validate,					
 					handler: function(){											
 						inviteUserPanel.form.submit({
@@ -134,40 +134,40 @@ var validateButton = new Ext.Button(
 								Ext.Msg.alert('Error', Voltan.i18ln.labels.problemValidatingUsers);
 								win.close();
 							}
-							
+
 						});
 					}
-					
+
 				});
-		
- 			var win = win ||  new Ext.Window({
-				id:'inviteUserToGroupWindow',
-                closable:true,
-                closeAction :'close',
-				collapsible:false,
-				modal:true,
-				//x:e.getXY()[0],
-				//y:e.getXY()[1],
-				items:[
-					addEmailButton,
-					inviteUserPanel
-					  ],
-				buttons: [
-					validateButton,
-					submitButton,
-				{
-            	text: 'Cancel',
-				handler:function(){ win.close();}
-		        }
-				]
-					
-				
-				});
-				
-				win.show();
-			
-		}
-		
-		
-		return {'inviteUserToGroup':inviteUserToGroup}		
-	};
+
+		var win = win ||  new Ext.Window({
+			id:'inviteUserToGroupWindow',
+			closable:true,
+			closeAction :'close',
+			collapsible:false,
+			modal:true,
+			//x:e.getXY()[0],
+			//y:e.getXY()[1],
+			items:[
+			       addEmailButton,
+			       inviteUserPanel
+			       ],
+			       buttons: [
+			                 validateButton,
+			                 submitButton,
+			                 {
+			                	 text: 'Cancel',
+			                	 handler:function(){ win.close();}
+			                 }
+			                 ]
+
+
+		});
+
+		win.show();
+
+	}
+
+
+	return {'inviteUserToGroup':inviteUserToGroup}		
+};

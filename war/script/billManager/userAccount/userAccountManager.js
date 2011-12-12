@@ -1,5 +1,5 @@
-
-Voltan.billManager.userAccountManagerFn = function(cfg){
+Ext.namespace('billManager.userAccountManager');
+billManager.userAccountManager.fn = function(cfg){
 
 	var forgotPasswordPanel;
 	var createAccountPanel;

@@ -1,6 +1,6 @@
 (ns billshare.app_servlet
   (:gen-class :extends javax.servlet.http.HttpServlet)
-  (:use billshare.core)
+  (:require billshare.core)
   (:use [appengine-magic.servlet :only [make-servlet-service-method]]))
 
 

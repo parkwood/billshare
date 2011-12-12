@@ -1,5 +1,7 @@
 
-Voltan.billManager.userGroupManagerFn = function(cfg){
+Ext.namespace('billManager.userGroupManager');
+
+billManager.userGroupManager.fn = function(cfg){
 
 	var groupMembersGrid;
 	var groupGrid;
@@ -58,7 +60,7 @@ Voltan.billManager.userGroupManagerFn = function(cfg){
 			local: true
 		});
 
-		groupGrid = Voltan.extExtension.util.editorGridBuilder.buildGrid({
+		groupGrid = billManager.util.grid.editorGridBuilder.buildGrid({
 			id: 'groupGrid',
 			persistUrl:'/persistGroups',		
 			store: groupDataStore,

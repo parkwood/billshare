@@ -1,5 +1,6 @@
 
-Voltan.billManager.createNewView = function(viewManagers,language){
+Ext.namespace('billManager.layout');
+billManager.layout.fn = function(viewManagers,language){
 
 
 	var	userGroupManager = viewManagers.userGroupManager;

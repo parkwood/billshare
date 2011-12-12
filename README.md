@@ -9,6 +9,11 @@ lein deps
 lein run
 ```
 
+GAE Commands
+lein appengine-prepare
+dev_appserver war
+appcfg war
+
 ## License
 
 Copyright (C) 2011 FIXME

@@ -2,7 +2,8 @@
  * 
  * @param {Object} messages - values are of form {message:''}
  */
-Voltan.billManager.helpManagerFn = function(messages){
+Ext.namespace('billManager.helpManager');
+billManager.helpManager.fn = function(messages){
 
 	var helpPanel = new Ext.Panel({
 		ctCls:'mahmoud',

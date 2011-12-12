@@ -1,3 +1,4 @@
+Ext.namespace('Voltan.i18ln');
 Voltan.i18ln.labels = {
 		logout:'Logout',
 		saveFailure:'Oh no! bad thing happen',

@@ -15,6 +15,7 @@
  * maps can merge form state into a graph of objects using the beanutils
  * expression langauge for the the form field names.
  */
+Ext.namespace('Ext.ux.form');
 Ext.ux.form.SeamFormPanel = Ext.extend(Ext.form.FormPanel, {
     // private
     createForm: function(){

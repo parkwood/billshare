@@ -11,7 +11,8 @@
 (defpage user-groups "/userGroups" [] 
   (common/no-arg-data service/get-groups))
 
-(defpage [:any "/persistGroups"] {:keys [toPersist]} 
+(defpage persist-groups [:any "/persistGroups"] {:keys [toPersist]} 
+  (prn "to persist" toPersist)
   (let [groups-as-passed (clj-json/parse-string toPersist true)]
     (prn "as passed " groups-as-passed)
     (common/arg-data service/persistAndAugmentGroup groups-as-passed))

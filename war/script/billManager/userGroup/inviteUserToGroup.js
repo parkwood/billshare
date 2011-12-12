@@ -1,5 +1,5 @@
-
-Voltan.billManager.inviteUserToGroupDialogFn = function(cfg){
+Ext.namespace('billManager.userGroup.inviteUserToGroup');
+billManager.userGroup.inviteUserToGroup.dialogFn = function(cfg){
 
 	var persistInvitationsProxy = new Ext.ux.data.SeamRemotingProxy({
 		remoteMethod: cfg.sessionProxy.groupList.persistInvitations, 

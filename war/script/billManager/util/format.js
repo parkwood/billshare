@@ -1,6 +1,7 @@
+Ext.namespace('billManager.util.format');
 var dateTimeRenderer = Ext.util.Format.dateRenderer('m/d/Y HH:mm');
 
-Voltan.extExtension.util.Format.ukMoney = function(v){
+billManager.util.format.ukMoney = function(v){
 	v = (Math.round((v-0)*100))/100;
 	v = (v == Math.floor(v)) ? v + ".00" : ((v*10 == Math.floor(v*10)) ? v + "0" : v);
 	v = String(v);

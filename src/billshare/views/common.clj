@@ -15,13 +15,16 @@
                [:div#wrapper
                 content]])))
 
+(defn get-user-email []
+  (let [user (guser/current-user)]
+    (guser/get-email user))
+  )
+
 (defn no-arg-data [f]
-  (let [user (guser/current-user)
-        ds-user (ds-user-service/get-user (guser/get-email user))]
+  (let [ds-user (ds-user-service/get-user (get-user-email))]
     (response/json {:data (f ds-user)})))
 
 (defn arg-data [f args-seq]
-  (let [user (guser/current-user)
-        ds-user (ds-user-service/get-user (guser/get-email user))
+  (let [ds-user (ds-user-service/get-user (get-user-email))
         fn-with-user (partial f ds-user)]
     (response/json (reduce (fn [x] ()) {} args-seq))))

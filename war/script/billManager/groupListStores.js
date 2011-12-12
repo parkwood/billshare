@@ -1,7 +1,8 @@
 /**
  *   
- */    
-Voltan.billManager.groupListStoresBuilderFn = function(groupList){    	
+ */   
+Ext.namespace('billManager.groupListStores');
+billManager.groupListStores.builderFn = function(groupList){    	
 
 	return{
 		getNewGroupMembersStore:function(){

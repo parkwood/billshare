@@ -1,5 +1,5 @@
-
-Voltan.billManager.owagesManagerFn = function(cfg){
+Ext.namespace('billManager.owages');
+billManager.owages.fn = function(cfg){
 
 	var owedProxy = new Ext.ux.data.SeamRemotingProxy({
 		remoteMethod: cfg.sessionProxy.taskManager.getOwed, 

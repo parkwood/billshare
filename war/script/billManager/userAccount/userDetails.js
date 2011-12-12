@@ -1,4 +1,5 @@
-Voltan.billManager.userDetailsFn = function(cfg){
+Ext.namespace('billManager.userAccount.userDetails');
+billManager.userAccount.userDetails.fn = function(cfg){
 
 	var usernameField = { 
 			xtype: 'textfield',

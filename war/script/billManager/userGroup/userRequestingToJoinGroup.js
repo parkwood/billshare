@@ -1,5 +1,6 @@
+Ext.namespace('billManager.userGroup.userRequestingToJoinGroup');
 
-Voltan.billManager.userRequestingToJoinGroupFn = function(cfg){
+billManager.userGroup.userRequestingToJoinGroup.fn = function(cfg){
 
 	var requestToJoinGroup = function(grid,groupMembersGrid){
 

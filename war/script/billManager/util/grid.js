@@ -1,4 +1,6 @@
-Voltan.extExtension.util.editorGridBuilder = function(){
+Ext.namespace('billManager.util.grid');
+
+billManager.util.grid.editorGridBuilder = function(){
 
 	function saveGrid(grid){
 

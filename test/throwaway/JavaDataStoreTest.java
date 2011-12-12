@@ -15,6 +15,7 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.users.User;
+import com.google.appengine.api.users.UserService;
 import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
 
@@ -79,8 +80,8 @@ public class JavaDataStoreTest {
     }
     
     public void testUser(){
-    	//User x = new User();
-    	
+    	UserService userService = com.google.appengine.api.users.UserServiceFactory.getUserService();
+    	//userService.
     }
 
 

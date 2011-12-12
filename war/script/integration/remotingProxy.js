@@ -1,3 +1,4 @@
+Ext.namespace('Voltan.billManager');
 // This line should be included in all files in order to reference a local
 // blank image (by default BLANK_IMAGE_URL = http://www.extjs.com)
 Ext.BLANK_IMAGE_URL = 'ext2.2/resources/images/default/s.gif';

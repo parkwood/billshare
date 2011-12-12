@@ -1,5 +1,5 @@
-
-Voltan.billManager.userTasksFn = function(cfg){
+Ext.namespace('billManager.userTasks');
+billManager.userTasks.fn = function(cfg){
 
 
 	var comp = cfg.sessionProxy.taskManager;

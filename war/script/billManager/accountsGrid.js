@@ -1,5 +1,6 @@
+Ext.namespace('billManager.accountsGrid');
 
-Voltan.billManager.accountsFn = function(cfg){
+billManager.accountsGrid.accountsFn = function(cfg){
 
 
 	var proxy = new Ext.ux.data.SeamRemotingProxy({
@@ -207,7 +208,7 @@ http://127.0.0.1/examples/grid-filtering/grid-filter.html
 		         ],
 		         local:true});
 
-	var grid = Voltan.extExtension.util.editorGridBuilder.buildGrid({
+	var grid = billManager.util.grid.editorGridBuilder.buildGrid({
 		id:'accountsGrid',                
 		persistUrl: '/persistAccounts',        
 		store: dataStore,        

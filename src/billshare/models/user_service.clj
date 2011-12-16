@@ -1,8 +1,8 @@
 (ns billshare.models.user-service
-  (:require [billshare.models.data-model]
+  (:require [billshare.models.data-model :as model]
             [appengine-magic.services.datastore :as ds])
-  (:import  [billshare.models.data_model User House UserHouseRelation Account]
-            ))
+  (:import  [billshare.models.data_model User Group UserGroupRelation Account]
+            [com.google.appengine.api.datastore KeyFactory]))
 
 
 
@@ -15,46 +15,55 @@
   (let [user (first (ds/query :kind User :filter (= :email email)))]
     (ds/query :kind Account :ancestor user)))
 
-(defn- augment-uhr-with-house [{:keys [relationshipStatus] :as uhr}]
-  "prob not too efficient doing query per house..optimize later"
-  (let [saved-house (first(ds/query :kind House :ancestor (:house uhr)))]
-    (assoc saved-house :relationshipStatus relationshipStatus :id (ds/key-str saved-house)))
+(defn- assoc-id-with-group [group relationshipStatus]
+  (assoc group :relationshipStatus relationshipStatus :id (model/get-numeric-id group)))
+
+(defn- augment-Group-with-ugr [{:keys [relationshipStatus] :as ugr}]
+  "prob not too efficient doing query per Group..optimize later"
+  ;(prn "ugr" ugr)
+  (let [saved-Group (ds/retrieve Group (:group ugr) )]
+    ;(prn "saved-Groups" saved-Groups)
+    (assoc-id-with-group saved-Group relationshipStatus))
   )
 
 (defn get-groups [user]
-  (if-let [uhrs (ds/query :kind UserHouseRelation :ancestor user)]
-    (map  augment-uhr-with-house uhrs)
+  (if-let [ugrs (ds/query :kind UserGroupRelation :ancestor user)]    
+    (map  augment-Group-with-ugr ugrs)
     []))
 
 ;description	sdsd
 ;entityStatus	ACTIVE
-;houseId - dont need this. the id is the house id	
+;GroupId - dont need this. the id is the Group id	
 ;id	-1
 ;name	sdsd
 ;newRecord	true
 ;relationshipStatus	
 ;tempId	1003
 (defn- persistGroup [user {:keys [id name description relationshipStatus]}]
-  "lets assume we have user already"
-  ;(prn "A group"  id name description relationshipStatus)
-  (if-let [uhr (first(ds/query :kind UserHouseRelation :ancestor user :filter (= :house id)))]
-    (let [house (first(ds/query :kind House :ancestor (:house uhr)))
-          saved-house (ds/save! (assoc house :description description :name name))
-          saved-uhr (ds/save! (assoc uhr :relationshipStatus relationshipStatus))]
-      saved-house)
-    (let [saved-house (ds/save! (ds/new* House [name description]))
-          uhr (ds/save! (ds/new* UserHouseRelation [relationshipStatus (ds/key-str saved-house)] :parent user))
+  ""
+  
+  (if-let [group (ds/retrieve Group (model/create-key-from-numeric "Group" id))]    
+    (let [saved-Group (ds/save! (assoc group :description description :name name))
+          retrieved-ugr (ds/retrieve UserGroupRelation (:userGroupRelation group))
+          saved-uhr (ds/save! (assoc retrieved-ugr :relationshipStatus relationshipStatus))]
+      ;(prn "i could find group with id"  id)
+      saved-Group)
+    (let [saved-Group-minus-ugr (ds/save! (ds/new* Group [name description nil]))
+          ugr (ds/save! (ds/new* UserGroupRelation [relationshipStatus saved-Group-minus-ugr] :parent user))
+          saved-Group (ds/save! (assoc saved-Group-minus-ugr :userGroupRelation ugr))
           ]
-        saved-house
-      )  
+    ;(prn "cannot find group with id"  id)
+        saved-Group
+      )
     )
+  
   )
 
 (defn persistAndAugmentGroup [user {:keys [tempId relationshipStatus] :as from-web}] 
-  (prn from-web tempId)
-  (let [saved-house (persistGroup user from-web)]
-    ;(prn "!!!!!!!!!!11" saved-house)
-    (assoc saved-house :tempId tempId :relationshipStatus relationshipStatus :id (ds/key-str saved-house)))
+  ;(prn "from web"  from-web tempId)
+  (let [saved-Group (persistGroup user from-web)]
+    ;(prn "!!!!!!!!!!11" saved-Group)    
+    (assoc (assoc-id-with-group saved-Group relationshipStatus) :tempId tempId  ))
   )
 
 

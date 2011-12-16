@@ -15,22 +15,27 @@
       ~@body))
   )
 
-(defn extract-data [result]
-  (:data (clj-json/parse-string (:body result) true)))
+(defn extract-body [extractor result]
+  (extractor (clj-json/parse-string (:body result) true)))
 ;so this is basically a whole server integration test - good/bad?
-(deftest get-no-houses-when-none-exist
+(deftest get-no-Groups-when-none-exist
   (noir-gae-test
-    (is (= [] (extract-data (groups-manager/user-groups [])) ))))
+    (is (= [] (extract-body :data (groups-manager/user-groups [])) ))))
 
 ;(run-tests)
 (deftest test-group-is-contained-in-map-after-persist
   (noir-gae-test
-    (is (= {} (groups-manager/persist-groups {:toPersist "[{
+    (is (let [result-map (extract-body identity (groups-manager/persist-groups {:toPersist "[{
                                                \"description\":	\"sdsd\",
                                                \"entityStatus\": \"ACTIVE\",                                               	
                                                \"id\"	: -1,
                                                \"name\" :	\"sdsd\",
                                                \"newRecord\" : \"true\",
                                                \"relationshipStatus\" :	\"ACTIVE\",
-                                               \"tempId\" :	1003}]"})))))
+                                               \"tempId\" :	1003}]"}))]
+          ;(prn (keys result-map) (keys result-map) )
+          (and (keys result-map) 
+               (= 1003 (:tempId (first (vals result-map))))
+               (not (= -1 (:id result-map))))
+          ))))
 

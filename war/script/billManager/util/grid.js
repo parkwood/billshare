@@ -37,7 +37,7 @@ billManager.util.grid.editorGridBuilder = function(){
 			url: grid.persistUrl || '/unknown',
 			success: function(response){
 				var jsonMessage = Ext.decode(response.responseText);
-				callBack.call(jsonMessage);
+				callBack(jsonMessage);
 			},
 			failure: function(){alert("Error")}, 	   
 			params: {toPersist: Ext.util.JSON.encode(toSubmit)}
@@ -53,8 +53,8 @@ billManager.util.grid.editorGridBuilder = function(){
 		var i;
 		for(i = 0; i < records.length; i++) {
 			var gridRow = records[i];
-			if(wheresTheResponse.contains(gridRow.id)) {
-				var savedGroup = wheresTheResponse.get(gridRow.id);
+			if(wheresTheResponse[gridRow.id]) {
+				var savedGroup = wheresTheResponse[gridRow.id];
 				if(savedGroup.message==="failure"){
 					console.debug('dj ohno');
 					//		this.showError(action.result.error, this.saveFailedText);                

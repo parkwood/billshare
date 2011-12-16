@@ -8,6 +8,5 @@
 (require 'billshare.views.account-manager)
 (require 'billshare.views.groups-manager)
 
-
 ;; def the appengine app
 (gae/def-appengine-app billshare-app (noir/gae-handler nil))

@@ -13,6 +13,7 @@ import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
@@ -70,18 +71,26 @@ public class JavaDataStoreTest {
     public void testInsertParentAndThenChild() {
         DatastoreService ds = DatastoreServiceFactory.getDatastoreService();
 		assertEquals(0, ds.prepare(new Query("yam")).countEntities(withLimit(10)));
-		Entity parent = new Entity("maclau");
-		Key put = ds.put(parent);
+		//Entity parent = new Entity("maclau");
+		//Key put = ds.put(parent);
 		//parent must have been persisted first
-		Entity entity = new Entity("yam", put);
+		Entity entity = new Entity("yam");
 		entity.setProperty("varent", "b");
 		ds.put(entity);
-		assertEquals(1, ds.prepare(new Query("yam")).countEntities(withLimit(10)));
+		
+		Entity entity2 = new Entity("yam");
+		entity2.setProperty("varent", "b");
+		Key put2 = ds.put(entity2);
+		System.out.println(put2.toString());
+		Key createKey = KeyFactory.createKey("yam", 2);
+	createKey.
+		assertEquals(1, ds.prepare(new Query("yam",createKey)).countEntities(withLimit(10)));
     }
     
     public void testUser(){
     	UserService userService = com.google.appengine.api.users.UserServiceFactory.getUserService();
     	//userService.
+    	
     }
 
 

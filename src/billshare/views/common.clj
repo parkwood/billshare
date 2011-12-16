@@ -26,5 +26,8 @@
 
 (defn arg-data [f args-seq]
   (let [ds-user (ds-user-service/get-user (get-user-email))
-        fn-with-user (partial f ds-user)]
-    (response/json (reduce (fn [x] ()) {} args-seq))))
+        fn-with-user (partial f ds-user)
+        result-map (reduce (fn [result x] (prn "x" x)  (let [fn-result (fn-with-user x)]
+                                            (assoc result (:tempId fn-result) fn-result))) {} args-seq)]
+    (prn "result map" result-map)
+    (response/json result-map )))

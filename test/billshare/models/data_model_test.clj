@@ -28,7 +28,7 @@
                p1-user (ds/save! (assoc p-user :userGroupRelations (conj (:userGroupRelations p-user) (ds/get-key-object p-ugr) )))              
                retrieved-uhr (first (ds/query :kind UserGroupRelation :ancestor p1-user :filter (= :group p-Group) ))
                retrieved-Groups (ds/query :kind Group :ancestor (:group retrieved-uhr) )
-               group-after-marshal (clj-json/parse-string (clj-json/generate-string (assoc (first retrieved-Groups) :id (model/get-numeric-id (first retrieved-Groups)))) true)
+               group-after-marshal (clj-json/parse-string (clj-json/generate-string (assoc (first retrieved-Groups) :id (ds/key-id (first retrieved-Groups)))) true)
                retrieved-group-after-marshal (ds/retrieve Group (model/create-key-from-numeric "Group" (:id group-after-marshal))  )
                ]
            ;(prn retrieved-uhr) 

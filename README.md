@@ -1,6 +1,11 @@
 # billshare
 
-A website written in noir. 
+A demo of sencha and clojure - a website for keeping track of bills/expenses amongst people 
+within groups, such as students in a student house
+
+TODOS:
+- manage groups page under way. tests for it are quite good. need to tweak js to get that working
+- all other functionality needs doing
 
 ## Usage
 

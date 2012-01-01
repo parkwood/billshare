@@ -37,8 +37,6 @@ billManager.userGroup.userRequestingToJoinGroup.fn = function(cfg){
 			closeAction :'close',
 			collapsible:false,
 			modal:true,
-			//x:e.getXY()[0],
-			//y:e.getXY()[1],
 			items:inviteUserPanel,
 			buttons: [{
 				text: 'Request Membership',

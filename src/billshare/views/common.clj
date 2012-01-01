@@ -20,14 +20,15 @@
     (guser/get-email user))
   )
 
-(defn no-arg-data [f]
+(defn call-fn-with-args [f & args]
   (let [ds-user (ds-user-service/get-user (get-user-email))]
-    (response/json {:data (f ds-user)})))
+    (response/json {:data (apply f ds-user args)})))
 
-(defn arg-data [f args-seq]
+(defn map-fn-returning-map-on-tempId [f args-seq]
   (let [ds-user (ds-user-service/get-user (get-user-email))
         fn-with-user (partial f ds-user)
-        result-map (reduce (fn [result x] (prn "x" x)  (let [fn-result (fn-with-user x)]
-                                            (assoc result (:tempId fn-result) fn-result))) {} args-seq)]
+        result-map (reduce (fn [result x] 
+                             (let [fn-result (fn-with-user x)]
+                               (assoc result (:tempId fn-result) fn-result))) {} args-seq)]
     (prn "result map" result-map)
     (response/json result-map )))

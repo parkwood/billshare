@@ -81,6 +81,7 @@ public class JavaDataStoreTest {
 		Entity entity2 = new Entity("yam");
 		entity2.setProperty("varent", "b");
 		Key put2 = ds.put(entity2);
+		entity.
 		System.out.println(put2.toString());
 		Key createKey = KeyFactory.createKey("yam", 2);
 	createKey.

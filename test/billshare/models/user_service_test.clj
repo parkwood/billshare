@@ -2,6 +2,7 @@
   (:use [clojure.test])
   (:require [billshare.models.user-service :as service]
             [appengine-magic.testing :as ae-testing]
+            [appengine-magic.services.datastore :as ds]
             [billshare.models.data-model])
   (:import  [billshare.models.data_model User Group UserGroupRelation Account]))
 ;(run-tests)
@@ -27,12 +28,6 @@
                 (= (:id queried-Group) (:id persisted-Group))
                 (= (:relationshipStatus queried-Group) (:relationshipStatus persisted-Group)))
               )))
-(comment(run-tests))
-
-(deftest test-get-no-Groups-when-there-are-none
-  (is (= [] (let
-        [user (service/get-user "vadal@no")]
-        (service/get-groups user)))))
 
 (deftest test-retrieve-multiple-groups
   (is (let [user (service/get-user "vadal@no")
@@ -42,3 +37,39 @@
                names (map :name groups)]
         ;(prn groups)
         (not (= (first names) (second names))))))
+
+(deftest test-get-no-Groups-when-there-are-none
+  (is (= [] (let
+        [user (service/get-user "vadal@no")]
+        (service/get-groups user)))))
+
+(defn setup-house-with-two-people []
+  (let [user1 (service/get-user "vadal@no")
+            persist-Group (service/persistAndAugmentGroup user1 Group-from-browser)
+            user2 (service/get-user "badal@no")
+            try-add (service/find-and-join-group user2 (:name Group-from-browser))]
+    [user2 persist-Group]))
+
+(deftest test-create-group-then-add-second-person
+  (is (= 2 (let [[user2 persist-Group] (setup-house-with-two-people)
+                 users-in-house (service/get-group-members user2 (ds/key-id persist-Group))]
+             ;(prn users-in-house)
+             (count users-in-house)))))
+(comment(run-tests))
+
+(deftest test-error-when-house-does-not-exist
+  (is (= "you are not a member of the group you are requesting"
+         (let [user (service/get-user "vadal@no")
+               response (service/get-group-members user 3)]
+           response)))
+  (is (= "unable to find the group aGroup" 
+         (let [user (service/get-user "vadal@no")
+               response (service/find-and-join-group user (:name Group-from-browser))]
+           response)))
+  )
+
+(deftest test-error-when-user-already-in-house
+  (is (= "you already belong to this group"
+         (let [[user2 persist-Group] (setup-house-with-two-people)
+               try-add (service/find-and-join-group user2 (:name Group-from-browser))]
+           try-add))))

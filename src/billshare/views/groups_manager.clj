@@ -6,16 +6,18 @@
   (:use [noir.core :only [defpage]]))
 
 
-(defpage [:any "/groupMembersList"] {:keys [groupId]} {})
+(defpage [:any "/groupMembersList"] {:keys [groupId]} 
+  (common/call-fn-with-args service/get-group-members groupId))
 
 (defpage user-groups "/userGroups" [] 
-  (common/no-arg-data service/get-groups))
+  (common/call-fn-with-args service/get-groups))
+
+(defpage user-requesting-to-join-group "userRequestingToJoinGroup" {:keys [groupName]}
+  (common/call-fn-with-args service/find-and-join-group groupName))
 
 (defpage persist-groups [:any "/persistGroups"] {:keys [toPersist]} 
-  ;(prn "to persist" toPersist)
-  (let [groups-as-passed (clj-json/parse-string toPersist true)]
-    ;(prn "as passed " groups-as-passed)
-    (common/arg-data service/persistAndAugmentGroup groups-as-passed))
+  (let [groups-as-passed (clj-json/parse-string toPersist true)]    
+    (common/map-fn-returning-map-on-tempId service/persistAndAugmentGroup groups-as-passed))
   )
 
 

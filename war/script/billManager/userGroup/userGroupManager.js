@@ -101,7 +101,7 @@ billManager.userGroupManager.fn = function(cfg){
 		});
 
 		groupGrid.getSelectionModel().on('rowselect', function(sm, rowIdx, r){
-			var groupId = r.json && r.json.house && r.json.house.id;
+			var groupId = r.json && r.json.id ;
 			groupMembersDataStore.load({
 				params: {
 					groupId: groupId

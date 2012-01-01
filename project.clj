@@ -6,3 +6,5 @@
             :dev-dependencies [[appengine-magic "0.4.6"]] 
             )
 
+;FIXME - add several users to a house from ui
+
